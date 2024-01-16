@@ -7,6 +7,7 @@ request_queue = queue.Queue()
 # Змінна для унікальних номерів заявок
 request_counter = 1
 
+
 # Функція для генерації нових заявок
 def generate_request():
     global request_counter
@@ -14,6 +15,7 @@ def generate_request():
     request_queue.put(new_request)
     print(f"Generated new request: {new_request}")
     request_counter += 1
+
 
 # Функція для обробки заявок
 def process_request():
@@ -23,9 +25,14 @@ def process_request():
     else:
         print("Queue is empty. No requests to process.")
 
+
 # Головний цикл програми
-while True:
-    generate_request()  # Генерувати нові заявки
-    time.sleep(2)  # Затримка для імітації роботи програми з часовим інтервалом
-    process_request()  # Обробляти заявки
-    time.sleep(1)  # Затримка між обробкою заявок
+try:
+    while True:
+        generate_request()  # Генерувати нові заявки
+        time.sleep(2)  # Затримка для імітації роботи програми з часовим інтервалом
+        process_request()  # Обробляти заявки
+        time.sleep(1)  # Затримка між обробкою заявок
+
+except KeyboardInterrupt:
+    print("Program terminated by user.")
